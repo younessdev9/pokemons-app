@@ -4,9 +4,10 @@ import { getPokemonFetch } from "./features/pokemonSlice";
 import type { RootState } from "./store/rootReducer";
 import { PokemonCard } from "./components/pokemoncard";
 import { getPokeImgSrc } from "./utils/getPokeImageSrc";
-import Loader from "./components/Loader";
+import Loader from "./components/loader";
 import useInfiniteScroll from "./hooks/useInfiniteScroll";
-import { PokemonModal } from "./components/pokemonModal";
+import { Modal } from "./components/modal";
+import { PokemonDetails } from "./components/pokemonDetails";
 export default function App() {
   const [selectedPokemonUrl, setSelectedPokemonUrl] = useState<string | null>(
     null,
@@ -42,11 +43,14 @@ export default function App() {
           />
         ))}
       </div>
-      <PokemonModal
+      <Modal
         isOpen={!!selectedPokemonUrl}
         onClose={() => setSelectedPokemonUrl(null)}
-        pokemonUrl={selectedPokemonUrl || ""}
-      />
+      >
+        {selectedPokemonUrl && (
+          <PokemonDetails pokemonUrl={selectedPokemonUrl} />
+        )}
+      </Modal>
       {loadingMore && (
         <div className="mt-8 flex justify-center">
           <Loader size="medium" />

@@ -1,12 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getPokemonFetch } from "./features/pokemonSlice";
 import type { RootState } from "./store/rootReducer";
 import { PokemonCard } from "./components/pokemoncard";
 import { getPokeImgSrc } from "./utils/getPokeImageSrc";
 import Loader from "./components/Loader";
 import useInfiniteScroll from "./hooks/useInfiniteScroll";
+import { PokemonModal } from "./components/pokemonModal";
 export default function App() {
+  const [selectedPokemonUrl, setSelectedPokemonUrl] = useState<string | null>(
+    null,
+  );
   const dispatch = useDispatch();
   const { loading, loadingMore, pokemonList } = useSelector(
     (state: RootState) => state.pokemon,
@@ -29,9 +33,20 @@ export default function App() {
       <h1 className="mb-8 text-center text-3xl font-bold">Pokemon Cards</h1>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
         {pokemonList?.map((p, indx) => (
-          <PokemonCard key={indx} name={p.name} image={getPokeImgSrc(p.url)} />
+          <PokemonCard
+            url={p.url}
+            key={indx}
+            name={p.name}
+            image={getPokeImgSrc(p.url)}
+            onSelect={setSelectedPokemonUrl}
+          />
         ))}
       </div>
+      <PokemonModal
+        isOpen={!!selectedPokemonUrl}
+        onClose={() => setSelectedPokemonUrl(null)}
+        pokemonUrl={selectedPokemonUrl || ""}
+      />
       {loadingMore && (
         <div className="mt-8 flex justify-center">
           <Loader size="medium" />

@@ -1,17 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface PokemonState {
-  pokemonList: PokemonListResponse[];
+  pokemonList: { name: string; url: string }[];
   loading: boolean;
   error: string | null;
 }
-
-export type PokemonListResponse = {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: Pokemon[];
-};
 
 export type Pokemon = {
   name: string;

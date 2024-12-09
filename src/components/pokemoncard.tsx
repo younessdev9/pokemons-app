@@ -10,11 +10,12 @@ export function PokemonCard({ name, image, url, onSelect }: PokemonCardProps) {
     <div
       className="cursor-pointer rounded-lg bg-white p-4 shadow-md transition-transform hover:scale-105"
       onClick={() => onSelect(url)}
+      role="button"
     >
       <img
         src={image}
         alt={name}
-        className="mx-auto h-32 w-32 object-contain"
+        className="mx-auto h-36 w-36 object-contain"
       />
       <h2 className="mt-2 text-center text-xl capitalize">{name}</h2>
     </div>

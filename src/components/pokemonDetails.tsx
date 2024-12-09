@@ -1,45 +1,12 @@
-import { useEffect, useState } from "react";
 import Loader from "./loader";
-import client from "../utils/api";
+import { PokemonDetailsType } from "../hooks/usePokeDetails";
 
 interface PokemonDetailsProps {
-  pokemonUrl: string;
+  details: PokemonDetailsType | null;
+  loading: boolean;
 }
 
-interface PokemonDetails {
-  name: string;
-  height: number;
-  weight: number;
-  types: Array<{ type: { name: string } }>;
-  stats: Array<{ base_stat: number; stat: { name: string } }>;
-  sprites: {
-    other: {
-      "official-artwork": {
-        front_default: string;
-      };
-    };
-  };
-}
-
-export function PokemonDetails({ pokemonUrl }: PokemonDetailsProps) {
-  const [details, setDetails] = useState<PokemonDetails | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (pokemonUrl) {
-      setLoading(true);
-      client
-        .get(pokemonUrl)
-        .then((response) => {
-          setDetails(response.data);
-        })
-        .catch((error) =>
-          console.error("Error fetching pokemon details:", error),
-        )
-        .finally(() => setLoading(false));
-    }
-  }, [pokemonUrl]);
-
+export function PokemonDetails({ loading, details }: PokemonDetailsProps) {
   if (loading) {
     return (
       <div className="flex h-full items-center justify-center">
@@ -80,6 +47,7 @@ export function PokemonDetails({ pokemonUrl }: PokemonDetailsProps) {
               </p>
               <div className="h-2 w-full rounded-full bg-gray-200">
                 <div
+                  role="progressbar"
                   className="h-2 rounded-full bg-blue-500"
                   style={{ width: `${(stat.base_stat / 255) * 100}%` }}
                 />

@@ -8,10 +8,15 @@ import Loader from "./components/loader";
 import useInfiniteScroll from "./hooks/useInfiniteScroll";
 import { Modal } from "./components/modal";
 import { PokemonDetails } from "./components/pokemonDetails";
+import usePokeDetails from "./hooks/usePokeDetails";
+
 export default function App() {
   const [selectedPokemonUrl, setSelectedPokemonUrl] = useState<string | null>(
     null,
   );
+  const { details, loading: loadingDetails } = usePokeDetails({
+    pokemonUrl: selectedPokemonUrl || "",
+  });
   const dispatch = useDispatch();
   const { loading, loadingMore, pokemonList } = useSelector(
     (state: RootState) => state.pokemon,
@@ -48,7 +53,7 @@ export default function App() {
         onClose={() => setSelectedPokemonUrl(null)}
       >
         {selectedPokemonUrl && (
-          <PokemonDetails pokemonUrl={selectedPokemonUrl} />
+          <PokemonDetails details={details} loading={loadingDetails} />
         )}
       </Modal>
       {loadingMore && (

@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  // it must be a env variable in case of private server
+  baseURL: "https://pokeapi.co/api/v2",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

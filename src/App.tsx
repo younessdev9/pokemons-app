@@ -8,6 +8,7 @@ import Loader from "./components/loader";
 import useInfiniteScroll from "./hooks/useInfiniteScroll";
 import { Modal } from "./components/modal";
 import { PokemonDetails } from "./components/pokemonDetails";
+
 export default function App() {
   const [selectedPokemonUrl, setSelectedPokemonUrl] = useState<string | null>(
     null,

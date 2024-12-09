@@ -14,7 +14,7 @@ export function PokemonCard({ name, image, url, onSelect }: PokemonCardProps) {
       <img
         src={image}
         alt={name}
-        className="mx-auto h-32 w-32 object-contain"
+        className="mx-auto h-36 w-36 object-contain"
       />
       <h2 className="mt-2 text-center text-xl capitalize">{name}</h2>
     </div>

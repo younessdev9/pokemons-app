@@ -10,6 +10,7 @@ export function PokemonCard({ name, image, url, onSelect }: PokemonCardProps) {
     <div
       className="cursor-pointer rounded-lg bg-white p-4 shadow-md transition-transform hover:scale-105"
       onClick={() => onSelect(url)}
+      role="button"
     >
       <img
         src={image}

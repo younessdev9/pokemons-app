@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("homepage has title and loads correctly", async ({ page }) => {
-  await page.goto("http://localhost:5173/"); // Adjust the URL as needed
+  await page.goto("http://localhost:5173/");
 
   await expect(page).toHaveTitle(/Vite \+ React \+ TS/);
 

@@ -79,4 +79,10 @@ export default defineConfig({
   //   url: "http://127.0.0.1:5173",
   //   reuseExistingServer: !process.env.CI,
   // },
+  webServer: {
+    command: "yarn dev",
+    port: 5173,
+    timeout: 120 * 1000, // 120 seconds
+    reuseExistingServer: !process.env.CI,
+  },
 });

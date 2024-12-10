@@ -14,14 +14,10 @@ jobs:
         with:
           node-version: lts/*
       - name: Install dependencies
-        run: npm install -g yarn && yarn
+        run: yarn install
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
-      - name: Start Development Server
-        run: |
-          nohup yarn dev & # Start the server in the background
-          sleep 10 # Wait for the server to start
       - name: Run Playwright tests
         env:
-          BASE_URL: "http://localhost:5173" # Set your base URL here
+          BASE_URL: "http://127.0.0.1:5173"
         run: yarn playwright test
